@@ -1,5 +1,10 @@
 import sys
 import re
+import subprocess
+
+def sort_data(filename):
+    subprocess.Popen(['sort', '-u -o ' + filename, filename])
+
 
 def parse_data():
 
