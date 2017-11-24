@@ -3,7 +3,8 @@ import re
 import subprocess
 
 def sort_data(filename):
-    subprocess.Popen(['sort', '-u -o ' + filename, filename])
+    outstr = '-o' + filename
+    subprocess.Popen(['sort', '-u', outstr, filename])
 
 
 def parse_data():
@@ -73,8 +74,9 @@ def setup():
 
 
 def main():
-    data = parse_data()
-    prepare_files(data)
+    #data = parse_data()
+    #prepare_files(data)
+    sort_data('sort.txt')
 
 
 if __name__ == "__main__":
