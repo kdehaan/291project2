@@ -1,6 +1,7 @@
 import sys
 import re
 import subprocess
+from bsddb3 import db
 
 def sort_data(filename):
     outstr = '-o' + filename
@@ -79,6 +80,27 @@ def main():
     sort_data('terms.txt')
     sort_data('years.txt')
     sort_data('recs.txt')
+    terms = db.DB()
+    terms.open("terms.db",None, db.DB_HASH, db.DB_CREATE)
+    termscur = terms.cursor()
+    years = db.DB()
+    years.open("years.db",None, db.DB_BTREE, db.DB_CREATE)
+    yearscur = years.cursor()
+    recs = db.DB()
+    recs.open("recs.db",None, db.DB_BTREE, db.DB_CREATE)
+    recscur = recs.cursor()
+
+
+
+
+
+    terms.close()
+    years.close()
+    recs.close()
+    termscur.close()
+    yearscur.close()
+    recscur.close()
+
 
 
 if __name__ == "__main__":
