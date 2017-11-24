@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE dblp SYSTEM "dblp.dtd"><dblp>
-<article key="journals/acta/Saxena96"><author>Sanjeev Saxena</author><title>Parallel Integer Sorting and Simulation Amongst CRCW Models.</title><pages>607-619</pages><year>1996</year><journal>Acta Inf.</journal></article>
-<article key="journals/bsl/Maddy12"><author>Penelope Maddy</author><title>The philosophy of logic.</title><pages>481-504</pages><year>2012</year><journal>Bulletin of Symbolic Logic</journal></article>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE dblp SYSTEM "dblp.dtd">
+<dblp>
+    <article key="journals/acta/Saxena96">
+        <author>Sanjeev Saxena</author>
+        <title>Parallel Integer Sorting and Simulation Amongst CRCW Models.</title>
+        <pages>607-619</pages>
+        <year>1996</year>
+        <journal>Acta Inf.</journal>
+    </article>
+    <article key="journals/bsl/Maddy12">
+        <author>Penelope Maddy</author>
+        <title>The philosophy of logic.</title>
+        <pages>481-504</pages>
+        <year>2012</year>
+        <journal>Bulletin of Symbolic Logic</journal>
+    </article>
+    
 <article key="journals/cii/ElghazelBGHMZ15"><author>Wiem Elghazel</author><author>Jacques M. Bahi</author><author>Christophe Guyeux</author><author>Mourad Hakem</author><author>Kamal Medjaher</author><author>Noureddine Zerhouni</author><title>Dependability of wireless sensor networks for industrial prognostics and health management.</title><pages>1-15</pages><year>2015</year><journal>Computers in Industry</journal></article>
 <article key="journals/tele/LeePLB15"><author>Sangwon Lee</author><author>Eun-A. Park</author><author>Seonmi Lee</author><author>Justin Brown</author><title>Determinants of IPTV diffusion.</title><pages>439-446</pages><year>2015</year><journal>Telematics and Informatics</journal></article>
 <article key="journals/pvldb/Schindler12"><author>Jiri Schindler</author><title>I/O Characteristics of NoSQL Databases.</title><pages>2020-2021</pages><year>2012</year><journal>PVLDB</journal></article>
