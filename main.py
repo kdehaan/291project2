@@ -76,7 +76,9 @@ def setup():
 def main():
     #data = parse_data()
     #prepare_files(data)
-    sort_data('sort.txt')
+    sort_data('terms.txt')
+    sort_data('years.txt')
+    sort_data('recs.txt')
 
 
 if __name__ == "__main__":
