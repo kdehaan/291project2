@@ -7,52 +7,33 @@ def fill_db(database, curs, filename):
     #outstr = '-o' + filename
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
-        if filename == 'recs.txt':
-            key = ''
-            value = ''
-            if line[0] == 10:
-                pass
-            else:
-                keyfound = False
-                count = -1
-                while not keyfound:
-                    count += 1
-                    if line[count] == 58:
-                        keyfound = True
-                    else:
-                        key += chr(line[count])
-                valuefound = False
-                while not valuefound:
-                    count += 1
-                    if line[count] == 10:
-                        valuefound = True
-                    else:
-                        value += chr(line[count])
-                key = key.encode('utf-8')
-                database.put(key, value)
-        if filename == 'years.txt':
-            key = ''
-            value = ''
-            if line[0] == 10:
-                pass
-            else:
-                keyfound = False
-                count = -1
-                while not keyfound:
-                    count += 1
-                    if line[count] == 58:
-                        keyfound = True
-                    else:
-                        key += chr(line[count])
-                valuefound = False
-                while not valuefound:
-                    count += 1
-                    if line[count] == 10:
-                        valuefound = True
-                    else:
-                        value += chr(line[count])
-                key = key.encode('utf-8')
-                database.put(key, value)
+        key = ''
+        value = ''
+        if line[0] == 10:
+            pass
+        else:
+            keyfound = False
+            count = -1
+            while not keyfound:
+                count += 1
+                if line[count] == 58:
+                    keyfound = True
+                else:
+                    key += chr(line[count])
+            valuefound = False
+            while not valuefound:
+                count += 1
+                if line[count] == 10:
+                    valuefound = True
+                else:
+                    value += chr(line[count])
+            key = key.encode('utf-8')
+            database.put(key, value)
+    iter = curs.first()
+    while iter:
+        print(iter)
+        iter = curs.next()
+
 
 
 
@@ -134,13 +115,13 @@ def main():
     #data = parse_data()
     #prepare_files(data)
     terms = db.DB()
-    terms.open("terms.db",None, db.DB_BTREE, db.DB_CREATE)
+    terms.open("terms.idx",None, db.DB_BTREE, db.DB_CREATE)
     termscur = terms.cursor()
     years = db.DB()
-    years.open("years.db",None, db.DB_BTREE, db.DB_CREATE)
+    years.open("years.idx",None, db.DB_BTREE, db.DB_CREATE)
     yearscur = years.cursor()
     recs = db.DB()
-    recs.open("recs.db",None, db.DB_HASH, db.DB_CREATE)
+    recs.open("recs.idx",None, db.DB_HASH, db.DB_CREATE)
     recscur = recs.cursor()
 
     clear = input("Would you like to clear the databases and remake them, or use the existing databases? [Y/N] ").lower()
