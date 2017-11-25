@@ -8,19 +8,19 @@ def fill_db(database, curs, filename):
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
         if filename == 'recs.txt':
+            key = ''
+            value = ''
             if line[0] == 10:
                 pass
             else:
-                key = ''
                 keyfound = False
-                count = 0
+                count = -1
                 while not keyfound:
                     count += 1
                     if line[count] == 58:
                         keyfound = True
                     else:
                         key += chr(line[count])
-                value = ''
                 valuefound = False
                 while not valuefound:
                     count += 1
@@ -28,7 +28,31 @@ def fill_db(database, curs, filename):
                         valuefound = True
                     else:
                         value += chr(line[count])
-                
+                key = key.encode('utf-8')
+                database.put(key, value)
+        if filename == 'years.txt':
+            key = ''
+            value = ''
+            if line[0] == 10:
+                pass
+            else:
+                keyfound = False
+                count = -1
+                while not keyfound:
+                    count += 1
+                    if line[count] == 58:
+                        keyfound = True
+                    else:
+                        key += chr(line[count])
+                valuefound = False
+                while not valuefound:
+                    count += 1
+                    if line[count] == 10:
+                        valuefound = True
+                    else:
+                        value += chr(line[count])
+                key = key.encode('utf-8')
+                database.put(key, value)
 
 
 
@@ -37,8 +61,8 @@ def fill_db(database, curs, filename):
 def clear_db(database, curs):
     iter = curs.first()
     while (iter):
-        iter.delete()
-        iter = curs.next()
+        curs.delete()
+        iter = curs.first()
 
 def parse_data():
 
