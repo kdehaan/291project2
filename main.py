@@ -135,6 +135,7 @@ def main():
         fill_db(recs, recscur, 'recs.txt')
 
     done= False
+    output = key
     while not done:
         goodin = False
         answer = uncaps(input("Enter your database search. To see query options, enter h. To quit, enter q: "))
@@ -154,8 +155,9 @@ def main():
         counter = 0
         queryspots = []
         for i in answers:
-            if ':' in i:
-                querylist.apend(counter)
+            if ':' in i or '>' in i or '<' in i or '<=' in i or '>=' in i or '==' in i:
+                queryspots.apend(counter)
+
             counter += 1
             if i == 'q':
                 print("Exiting program...\n")
@@ -163,9 +165,13 @@ def main():
                 goodin = True
             elif i == 'h':
                 print('\nQuery options: (Enter the query type, then a colon, then the query. Multiple queries should be separated by a space)'
-                      '\nTitle: Search by title. \nAuthor: Search by author. \n'
+                      '\nTitle: Search by title, or words in title. \nAuthor: Search by author. \n'
                       'Year: Search by year. Can be equality search or range search. '
                       '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
+            elif i == 'output=full':
+                output = full
+            elif i == 'output=key':
+                output = key
 
         querylist = []
         for i in queryspots:
@@ -177,16 +183,28 @@ def main():
                     value += m
                 elif m == ':':
                     checkfound = True
+                elif '>' in i or '<' in i:
+                    checkfound = True
+                    querytype += m
                 else:
                     querytype += m
-            querylist.append([querytype, value])
+                mspot += 1
+            if checkfound:
+                querylist.append([querytype, value])
 
 
         for i in querylist:
             if not done:
-                if i == title:
-                    
-
+                if i[0] == 'title':
+                    pass
+                elif i[0] == 'author':
+                    pass
+                elif i[0] == 'year<':
+                    pass
+                elif i[0] == 'year>':
+                    pass
+                elif i[0] == 'year':
+                    pass
 
 
 
