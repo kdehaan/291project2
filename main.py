@@ -30,17 +30,20 @@ def fill_db(database, curs, filename):
             key = key.encode('utf-8')
             database.put(key, value)
 
+def uncaps(answer):
+    count = 0
+    for i in answer:
+        if ord(i) > 64 and ord(i) < 91:
+            answer[count] = chr(ord(i) + 32)
+        count += 1
+    return answer
+
 def print_db(db):
     curs = db.cursor()
     iter = curs.first()
     while iter:
         print(iter)
         iter = curs.next()
-
-
-
-
-
 
 def clear_db(database, curs):
     iter = curs.first()
@@ -103,16 +106,11 @@ def create_terms(data):
 def create_years(data):
     return
 
-
 def create_recs(data):
     return
 
-
 def setup():
     return
-
-
-
 
 def main():
     #data = parse_data()
@@ -127,7 +125,7 @@ def main():
     recs.open("recs.idx",None, db.DB_HASH, db.DB_CREATE)
     recscur = recs.cursor()
 
-    clear = input("Would you like to clear the databases and remake them, or use the existing databases? [Y/N] ").lower()
+    clear = uncaps(input("Would you like to clear the databases and remake them, or use the existing databases? [Y/N] "))
     if clear == 'y':
         clear_db(recs, recscur)
         clear_db(years, yearscur)
@@ -136,10 +134,17 @@ def main():
         fill_db(years, yearscur, 'years.txt')
         fill_db(recs, recscur, 'recs.txt')
 
-
-
-
-
+    done= False
+    while not done:
+        answer = uncaps(input("Enter your database search. To see query options, enter h. To quit, enter q: "))
+        if answer == 'h':
+            print('Query options: (Enter the query type, then a colon, then the query.'
+                  '\nTitle: Search by title. \nAuthor: Search by author. \n'
+                  'Year: Search by year. Can be equality search or range search. '
+                  '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. ')
+        else if answer == 'q':
+            print("Exiting program...\n")
+            done = True
 
 
     terms.close()
