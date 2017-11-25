@@ -7,6 +7,31 @@ def fill_db(database, curs, filename):
     #outstr = '-o' + filename
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
+        if filename == 'recs.txt':
+            if line[0] == 10:
+                pass
+            else:
+                key = ''
+                keyfound = False
+                count = 0
+                while not keyfound:
+                    count += 1
+                    if line[count] == 58:
+                        keyfound = True
+                    else:
+                        key += chr(line[count])
+                value = ''
+                valuefound = False
+                while not valuefound:
+                    count += 1
+                    if line[count] == 10:
+                        valuefound = True
+                    else:
+                        value += chr(line[count])
+                
+
+
+
 
 
 def clear_db(database, curs):
