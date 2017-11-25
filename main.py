@@ -29,6 +29,9 @@ def fill_db(database, curs, filename):
                     value += chr(line[count])
             key = key.encode('utf-8')
             database.put(key, value)
+
+def print_db(db):
+    curs = db.cursor()
     iter = curs.first()
     while iter:
         print(iter)
