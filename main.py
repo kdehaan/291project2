@@ -136,15 +136,62 @@ def main():
 
     done= False
     while not done:
+        goodin = False
         answer = uncaps(input("Enter your database search. To see query options, enter h. To quit, enter q: "))
-        if answer == 'h':
-            print('Query options: (Enter the query type, then a colon, then the query.'
-                  '\nTitle: Search by title. \nAuthor: Search by author. \n'
-                  'Year: Search by year. Can be equality search or range search. '
-                  '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. ')
-        else if answer == 'q':
-            print("Exiting program...\n")
-            done = True
+        answerparted = False
+        answers = []
+        counter = 0
+        lastend = 0
+        answercount = 0
+        for i in answer:
+            word = ''
+            if i == ' ' or ord(i) == 8:
+                for m in range(lastend, counter):
+                    word += answer[m]
+                answers[answercount] = word
+            counter += 1
+
+        counter = 0
+        queryspots = []
+        for i in answers:
+            if ':' in i:
+                querylist.apend(counter)
+            counter += 1
+            if i == 'q':
+                print("Exiting program...\n")
+                done = True
+                goodin = True
+
+        querylist = []
+        for i in queryspots:
+            querytype = ''
+            value = ''
+            checkfound = False
+            for m in answers[i]:
+                if checkfound:
+                    value += m
+                elif m == ':':
+                    checkfound = True
+                else:
+                    querytype += m
+            querylist.append([querytype, value])
+
+
+        for i in range(0, size(answers)):
+            if not done:
+                if answers[i] == 'h':
+                    print('\nQuery options: (Enter the query type, then a colon, then the query)'
+                          '\nTitle: Search by title. \nAuthor: Search by author. \n'
+                          'Year: Search by year. Can be equality search or range search. '
+                          '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
+                    goodin = True
+                elif answer[i] == 'q':
+                    print("Exiting program...\n")
+                    done = True
+                    goodin = True
+                elif answer[i]
+
+
 
 
     terms.close()
