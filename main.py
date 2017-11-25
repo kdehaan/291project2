@@ -161,6 +161,11 @@ def main():
                 print("Exiting program...\n")
                 done = True
                 goodin = True
+            elif i == 'h':
+                print('\nQuery options: (Enter the query type, then a colon, then the query. Multiple queries should be separated by a space)'
+                      '\nTitle: Search by title. \nAuthor: Search by author. \n'
+                      'Year: Search by year. Can be equality search or range search. '
+                      '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
 
         querylist = []
         for i in queryspots:
@@ -177,19 +182,10 @@ def main():
             querylist.append([querytype, value])
 
 
-        for i in range(0, size(answers)):
+        for i in querylist:
             if not done:
-                if answers[i] == 'h':
-                    print('\nQuery options: (Enter the query type, then a colon, then the query)'
-                          '\nTitle: Search by title. \nAuthor: Search by author. \n'
-                          'Year: Search by year. Can be equality search or range search. '
-                          '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
-                    goodin = True
-                elif answer[i] == 'q':
-                    print("Exiting program...\n")
-                    done = True
-                    goodin = True
-                elif answer[i]
+                if i == title:
+                    
 
 
 
