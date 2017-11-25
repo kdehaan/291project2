@@ -4,11 +4,10 @@ import subprocess
 from bsddb3 import db
 
 def fill_db(database, curs, filename):
-    outstr = '-o' + filename
-    sort = subprocess.Popen(['sort', '-u', outstr, filename], stdout=subprocess.PIPE)
+    #outstr = '-o' + filename
+    sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
-        print(line)
-    return sort.stdout
+
 
 def clear_db(database, curs):
     iter = curs.first()
@@ -86,13 +85,13 @@ def main():
     #data = parse_data()
     #prepare_files(data)
     terms = db.DB()
-    terms.open("terms.db",None, db.DB_HASH, db.DB_CREATE)
+    terms.open("terms.db",None, db.DB_BTREE, db.DB_CREATE)
     termscur = terms.cursor()
     years = db.DB()
     years.open("years.db",None, db.DB_BTREE, db.DB_CREATE)
     yearscur = years.cursor()
     recs = db.DB()
-    recs.open("recs.db",None, db.DB_BTREE, db.DB_CREATE)
+    recs.open("recs.db",None, db.DB_HASH, db.DB_CREATE)
     recscur = recs.cursor()
 
     clear = input("Would you like to clear the databases and remake them, or use the existing databases? [Y/N] ").lower()
