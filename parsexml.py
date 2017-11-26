@@ -83,17 +83,6 @@ def prepare_files(data):
             recs_file.write(rec_string)
 
 
-
-            # print(xml.key)
-            # print(xml.title_terms)
-            # print(xml.author_terms)
-            # print(xml.other_terms)
-
-
-
-
-
-
     # regex:
     # article block: <article.*/article>
     # article key: (?<=key=\").*(?=\")

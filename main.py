@@ -1,5 +1,3 @@
-import sys
-import re
 import subprocess
 from bsddb3 import db
 
