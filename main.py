@@ -31,17 +31,17 @@ def fill_db(database, curs, filename):
 def uncaps(answer):
     count = 0
     for i in answer:
-        if ord(i) > 64 and ord(i) < 91:
+        if 64 < ord(i) < 91:
             answer[count] = chr(ord(i) + 32)
         count += 1
     return answer
 
 def print_db(db):
     curs = db.cursor()
-    iter = curs.first()
-    while iter:
-        print(iter)
-        iter = curs.next()
+    iter_curs = curs.first()
+    while iter_curs:
+        print(iter_curs)
+        iter_curs = curs.next()
 
 def clear_db(database, curs):
     iter = curs.first()
