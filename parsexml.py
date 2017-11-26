@@ -12,16 +12,10 @@ def parse_data():
 
 
 def prepare_files(data):
-    create_terms(data)
-    create_years(data)
-    create_recs(data)
 
-
-
-
-def create_terms(data):
-
-    terms_file = open("terms.txt","w")
+    terms_file = open("terms.txt", "w")
+    years_file = open("years.txt", "w")
+    recs_file = open("recs.txt", "w")
 
     re_object = re.compile(r'<.*>')
     re_xmlheader = re.compile(r'(<\?xml|<!DOCTYPE|</dblp>)')
@@ -48,6 +42,7 @@ def create_terms(data):
                     continue
 
                 elif re_year.match(raw_tag):
+                    xml.year = raw_tag[6:]
                     continue
 
                 elif re_title.match(raw_tag):
@@ -79,6 +74,13 @@ def create_terms(data):
             for author in xml.author_terms:
                 line_string = 'a-' + author + ':' + xml.key + '\n'
                 terms_file.write(line_string)
+
+            year_string = xml.year + ':' + xml.key + '\n'
+            years_file.write(year_string)
+
+            rec_string = xml.key + ':' + xml.raw_string + '\n'
+            rec_string.replace("\\", "&#92;")
+            recs_file.write(rec_string)
 
 
 
