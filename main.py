@@ -34,6 +34,8 @@ def get_data(termscur, search_term):
     result = termscur.get(search_term, search_term, db.DB_SET)
     curs_iter = result
     result_set = set()
+    if not result:
+        return {}
     while curs_iter[0] == search_term:
         result_set.add(curs_iter[1].decode('utf-8'))
         curs_iter = termscur.next()
@@ -98,8 +100,18 @@ def main():
                 search_term = 'o-' + search_term
                 set_list.append(get_data(termscur, search_term))
             else:
-                search_term = item
-                set_list.append(get_data(termscur, search_term))
+                search_term_1 = 'o-' + item
+                search_term_2 = 'a-' + item
+                search_term_3 = 't-' + item
+                data1 = get_data(termscur, search_term_1.encode('utf-8'))
+                if data1:
+                    set_list.append(data1)
+                data2 = get_data(termscur, search_term_2.encode('utf-8'))
+                if data2:
+                    set_list.append(data2)
+                data3 = get_data(termscur, search_term_3.encode('utf-8'))
+                if data3:
+                    set_list.append(data3)
 
         net_set = set()
         for setitem in set_list:
