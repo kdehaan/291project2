@@ -13,7 +13,22 @@ def get_queries():
     return queries
 
 def get_year(yearscur, year, qualifier):
-    result = yearscur.get
+    result_set = set()
+    if qualifier == ':':
+        result = yearscur.get(year, year, db.DB_SET)
+    elif qualifier == '<':
+        result = yearscur.setrange(year, db.DB_SET)
+    curs_iter = result
+
+    while curs_iter[0] == year:
+        result_set.add(curs_iter[1].decode('utf-8'))
+        curs_iter = yearscur.next()
+        if not curs_iter:
+            curs_iter = ['', '']
+
+    return result_set
+
+
 
 def get_data(termscur, search_term):
     result = termscur.get(search_term, search_term, db.DB_SET)
@@ -23,7 +38,7 @@ def get_data(termscur, search_term):
         result_set.add(curs_iter[1].decode('utf-8'))
         curs_iter = termscur.next()
         if not curs_iter:
-            curs_iter = ['']
+            curs_iter = ['', '']
     return result_set
 
 def main():
