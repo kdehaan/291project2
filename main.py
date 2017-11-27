@@ -86,7 +86,13 @@ def main():
                 search_term = item
                 set_list.append(get_data(termscur, search_term))
 
-        print(set_list)
+        net_set = set()
+        for setitem in set_list:
+            if len(net_set) == 0:
+                net_set = setitem
+            else:
+                net_set = net_set & setitem
+        print(net_set)
 
 
 
