@@ -6,7 +6,7 @@ from xml_object import XmlObject
 def parse_data():
 
     data = sys.stdin.read()
-    # example usage on linux: cat 10.txt | python3 parsexml.py
+    # example usage on linux: cat 10.txt | python3 part1.py
 
     return data
 

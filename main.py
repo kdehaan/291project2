@@ -1,5 +1,6 @@
 import subprocess
 from bsddb3 import db
+import re
 
 def fill_db(database, curs, filename):
     #outstr = '-o' + filename
@@ -49,17 +50,26 @@ def clear_db(database, curs):
         curs.delete()
         iter = curs.first()
 
-
+def get_queries():
+    sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ")
+    parse_input = re.compile(r"([\w]+:[\w]+|year.[\d]{4}|title:\".+\"|\w+)")
+    # ([\w]+:[\w]+|year.[\d]{4}|title:\".+\"|\w+)
+    print(sel)
+    input_iter = parse_input.finditer(sel)
+    queries = list()
+    for item in input_iter:
+        queries.append(item.group())
+    return queries
 
 def main():
     terms = db.DB()
-    terms.open("terms.idx",None, db.DB_BTREE, db.DB_CREATE)
+    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
     termscur = terms.cursor()
     years = db.DB()
-    years.open("years.idx",None, db.DB_BTREE, db.DB_CREATE)
+    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
     yearscur = years.cursor()
     recs = db.DB()
-    recs.open("recs.idx",None, db.DB_HASH, db.DB_CREATE)
+    recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
     recscur = recs.cursor()
 
     clear = uncaps(input("Would you like to clear the databases and remake them, or use the existing databases? [Y/N] "))
@@ -93,7 +103,7 @@ def main():
         queryspots = []
         for i in answers:
             if ':' in i or '>' in i or '<' in i or '<=' in i or '>=' in i or '==' in i:
-                queryspots.apend(counter)
+                queryspots.append(counter)
 
 
             counter += 1
