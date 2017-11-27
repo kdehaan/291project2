@@ -1,5 +1,3 @@
-import sys
-import re
 import subprocess
 from bsddb3 import db
 
@@ -33,17 +31,17 @@ def fill_db(database, curs, filename):
 def uncaps(answer):
     count = 0
     for i in answer:
-        if ord(i) > 64 and ord(i) < 91:
+        if 64 < ord(i) < 91:
             answer[count] = chr(ord(i) + 32)
         count += 1
     return answer
 
 def print_db(db):
     curs = db.cursor()
-    iter = curs.first()
-    while iter:
-        print(iter)
-        iter = curs.next()
+    iter_curs = curs.first()
+    while iter_curs:
+        print(iter_curs)
+        iter_curs = curs.next()
 
 def clear_db(database, curs):
     iter = curs.first()
@@ -51,70 +49,9 @@ def clear_db(database, curs):
         curs.delete()
         iter = curs.first()
 
-def parse_data():
 
-    # while True:
-    #     sel = input("Select file (F) or input from stdin (S): ").lower()
-    #     if sel == "f":
-    #         filename = input("enter file location: ")
-    #         if not filename:
-    #             filename = '/testxml.xml'
-    #         f = open(filename, 'r')
-    #         data = f.read()
-    #         f.close()
-    #         break
-    #     elif sel == "s":
-    #         data = sys.stdin
-    #         break
-
-    data = sys.stdin.read()
-    # example usage on linux: cat 10.txt | python3 main.py
-
-    return data
-
-
-def prepare_files(data):
-    create_terms(data)
-    create_years(data)
-    create_recs(data)
-
-
-def create_terms(data):
-    # articles = re.compile('<article.*/article>')
-    # result = articles.match(data)
-
-    line = "Cats are smarter than dogs";
-
-    searchObj = re.search(r'(.*)a(.*?) .*', data, re.M | re.I)
-
-    if searchObj:
-        print(searchObj.group())
-        for item in searchObj.groups():
-            print(item)
-
-
-    # regex:
-    # article block: <article.*/article>
-    # article key: (?<=key=\").*(?=\")
-    # terms: [0-9a-zA-Z_]{3,}
-    # authors: (?<=<author>).*?(?=</)
-    # title: (?<=<title>).*?(?=</)
-    # contained tags with titles (?=(<[\w]+>)).*?(?=</)
-    return
-
-
-def create_years(data):
-    return
-
-def create_recs(data):
-    return
-
-def setup():
-    return
 
 def main():
-    #data = parse_data()
-    #prepare_files(data)
     terms = db.DB()
     terms.open("terms.idx",None, db.DB_BTREE, db.DB_CREATE)
     termscur = terms.cursor()
@@ -157,6 +94,7 @@ def main():
         for i in answers:
             if ':' in i or '>' in i or '<' in i or '<=' in i or '>=' in i or '==' in i:
                 queryspots.apend(counter)
+
 
             counter += 1
             if i == 'q':
