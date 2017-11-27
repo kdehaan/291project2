@@ -107,7 +107,17 @@ def main():
                 net_set = setitem
             else:
                 net_set = net_set & setitem
-        print(net_set)
+
+        if output_type == 'key':
+            for setitem in net_set:
+                print(setitem)
+        if output_type == 'full':
+            for setitem in net_set:
+                search_term = setitem.encode('utf-8')
+                result = recs.get(search_term)
+                print(result)
+
+
 
 
 
