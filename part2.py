@@ -2,7 +2,7 @@ import subprocess
 from bsddb3 import db
 
 
-def fill_db(database, curs, filename):
+def fill_db(database, filename):
     #outstr = '-o' + filename
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
@@ -30,7 +30,6 @@ def fill_db(database, curs, filename):
             database.put(key, value)
 
 
-
 def print_db(db):
     curs = db.cursor()
     iter_curs = curs.first()
@@ -38,7 +37,7 @@ def print_db(db):
         print(iter_curs)
         iter_curs = curs.next()
 
-def clear_db(database, curs):
+def clear_db(curs):
     iter = curs.first()
     while (iter):
         curs.delete()
@@ -59,13 +58,12 @@ def main():
     clear = input(
             "Would you like to clear the databases and remake them, or use the existing databases? [Y/N] ").lower()
     if clear == 'y':
-        clear_db(recs, recscur)
-        clear_db(years, yearscur)
-        clear_db(terms, termscur)
-        fill_db(terms, termscur, 'terms.txt')
-        fill_db(years, yearscur, 'years.txt')
-        fill_db(recs, recscur, 'recs.txt')
-
+        clear_db(recscur)
+        clear_db(yearscur)
+        clear_db(termscur)
+        fill_db(terms, 'terms.txt')
+        fill_db(years, 'years.txt')
+        fill_db(recs, 'recs.txt')
 
     terms.close()
     years.close()
