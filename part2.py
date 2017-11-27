@@ -4,29 +4,32 @@ from bsddb3 import db
 
 def fill_db(database, filename):
     outstr = '-o' + filename
-    sort = subprocess.Popen(['sort', '-u', outstr, filename])
-    sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
-    for line in sort.stdout:
+    subprocess.Popen(['sort', '-u', outstr, filename])
+    sort = open(filename)
+    for line in sort.readlines():
         key = ''
         value = ''
         if line[0] == 10:
             pass
         else:
-            keyfound = False
-            count = -1
-            while not keyfound:
-                count += 1
-                if line[count] == 58:
-                    keyfound = True
-                else:
-                    key += chr(line[count])
-            valuefound = False
-            while not valuefound:
-                count += 1
-                if line[count] == 10:
-                    valuefound = True
-                else:
-                    value += chr(line[count])
+            try:
+                keyfound = False
+                count = -1
+                while not keyfound:
+                    count += 1
+                    if line[count] == chr(58):
+                        keyfound = True
+                    else:
+                        key += line[count]
+                valuefound = False
+                while not valuefound:
+                    count += 1
+                    if line[count] == chr(10):
+                        valuefound = True
+                    else:
+                        value += line[count]
+            except:
+                valuefound = True
             key = key.encode('utf-8')
             database.put(key, value)
 
@@ -36,7 +39,7 @@ def print_db(db):
     iter_curs = curs.first()
     while iter_curs:
         print(iter_curs)
-        iter_curs = curs.next_nodup()
+        iter_curs = curs.next()
     curs.close()
 
 def clear_db(curs):
@@ -48,10 +51,10 @@ def clear_db(curs):
 
 def main():
     terms = db.DB()
-    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
+    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE, db.DB_DUP)
     termscur = terms.cursor()
     years = db.DB()
-    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
+    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE, db.DB_DUP)
     yearscur = years.cursor()
     recs = db.DB()
     recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
