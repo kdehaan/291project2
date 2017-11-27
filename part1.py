@@ -19,7 +19,7 @@ def prepare_files(data):
 
     re_object = re.compile(r'<.*>')
     re_xmlheader = re.compile(r'(<\?xml|<!DOCTYPE|</dblp>)')
-    re_key = re.compile(r'(?<=key=\").*(?=\")')
+    re_key = re.compile(r'(?<=key=\").*(?=\">)')
     re_tags = re.compile(r'(?=(<[\w]+>)).*?(?=</)')
     re_pages = re.compile(r'<pages>')
     re_title = re.compile(r'<title>')
