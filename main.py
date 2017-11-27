@@ -4,7 +4,7 @@ import re
 
 
 def get_queries():
-    sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ").lower()
+    sel = input("Enter your database search: ").lower()
     parse_input = re.compile(r"([\w]+:[\w]+|year.{1,2}[\d]{4}|title:\".+\"|output=[\w]{3,4}|[\w]+)")
     input_iter = parse_input.finditer(sel)
     queries = list()
