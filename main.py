@@ -2,10 +2,7 @@ import subprocess
 from bsddb3 import db
 import re
 
-<<<<<<< Updated upstream
-
-=======
-def fill_db(database, curs, filename):
+def fill_db(database, filename):
     #outstr = '-o' + filename
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
@@ -44,7 +41,7 @@ def clear_db(database, curs):
     while (iter):
         curs.delete()
         iter = curs.first()
->>>>>>> Stashed changes
+
 
 def get_queries():
     sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ").lower()
@@ -59,7 +56,7 @@ def main():
 
 
     done = False
-    output = key
+    output = 'key'
     while not done:
         goodin = False
         queries = get_queries()
@@ -79,7 +76,7 @@ def main():
         counter = 0
         queryspots = []
         for i in answers:
-            if ':' in i or '>' in i or '<' in i or '<=' in i or '>=' in i or '==' in i:
+            if ':' in i or '>' in i or '<' in i:
                 queryspots.append(counter)
 
 
@@ -94,9 +91,9 @@ def main():
                       'Year: Search by year. Can be equality search or range search. '
                       '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
             elif i == 'output=full':
-                output = full
+                output = 'full'
             elif i == 'output=key':
-                output = key
+                output = 'key'
 
         querylist = []
         for i in queryspots:
