@@ -24,6 +24,9 @@ def main():
     years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
     recs = db.DB()
     recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
+    terms.set_flags(db.DB_DUP)
+    years.set_flags(db.DB_DUP)
+    recs.set_flags(db.DB_DUP)
 
     while True:
         termscur = terms.cursor()
@@ -48,6 +51,8 @@ def main():
                 else:
                     search_term = item[6:]
                     search_term = 't-' + search_term
+                    result = termscur.get(search_term.encode('utf-8'), db.DB_FIRST)
+                    print(result)
                     print(search_term)
             elif match_author.match(item):
                 search_term = item[7:]
