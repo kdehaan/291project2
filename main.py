@@ -51,8 +51,8 @@ def clear_db(database, curs):
         iter = curs.first()
 
 def get_queries():
-    sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ")
-    parse_input = re.compile(r"([\w]+:[\w]+|year.[\d]{4}|title:\".+\"|\w+)")
+    sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ").lower()
+    parse_input = re.compile(r"([\w]+:[\w]+|year.{1,2}[\d]{4}|title:\".+\"|\w+)")
     # ([\w]+:[\w]+|year.[\d]{4}|title:\".+\"|\w+)
     print(sel)
     input_iter = parse_input.finditer(sel)
@@ -81,11 +81,11 @@ def main():
         fill_db(years, yearscur, 'years.txt')
         fill_db(recs, recscur, 'recs.txt')
 
-    done= False
+    done = False
     output = key
     while not done:
         goodin = False
-        answer = uncaps(input("Enter your database search. To see query options, enter h. To quit, enter q: "))
+        queries = get_queries()
         answerparted = False
         answers = []
         counter = 0
