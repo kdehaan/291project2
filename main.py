@@ -1,5 +1,5 @@
 # import subprocess
-# from bsddb3 import db
+from bsddb3 import db
 import re
 
 
@@ -18,8 +18,13 @@ def main():
     match_author = re.compile(r"author:")
     match_year = re.compile(r"year[:<>]")
     match_other = re.compile(r"other:")
+
     while True:
+        terms = db.DB()
+        terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
+        termscur = terms.cursor()
         queries = get_queries()
+
         for item in queries:
             if item == "output=key":
                 output_type = 'key'
@@ -28,20 +33,26 @@ def main():
                 output_type = 'full'
                 print("changed output")
             elif match_title.match(item):
-                print("title found")
+                if '"' in item:
+                    print("multival")
+                    search_term = item[7:-1]
+                    print(search_term)
+                else:
+                    search_term = item[6:]
+                    print(search_term)
             elif match_author.match(item):
-                print("author found")
+                search_term = item[7:]
+                print(search_term)
             elif match_year.match(item):
-                print("year found")
+                equality = item[4]
+                search_term = item[5:]
+                print(search_term)
             elif match_other.match(item):
-                print("other found")
+                search_term = item[6:]
+                print(search_term)
             else:
-                print("general term found")
-
-
-
-
-
+                search_term = item
+                print(item)
 
 
 
