@@ -74,7 +74,6 @@ def main():
         fill_db(years, 'years.txt')
         fill_db(recs, 'recs.txt')
 
-    print_db(years)
     terms.close()
     years.close()
     recs.close()

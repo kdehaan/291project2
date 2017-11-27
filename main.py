@@ -50,9 +50,11 @@ def main():
                     search_term = item[6:]
                     search_term = 't-' + search_term
                     search_term = search_term.encode('utf-8')
-                    result = terms.get(search_term, db.DB_MULTIPLE)
-                    print(result)
-                    print(())
+                    result = termscur.get(search_term, search_term, db.DB_SET)
+                    curs_iter = result
+                    while curs_iter:
+                        print(curs_iter)
+                        curs_iter = termscur.next()
                     print(search_term)
             elif match_author.match(item):
                 search_term = item[7:]
