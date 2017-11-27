@@ -23,6 +23,12 @@ def main():
         terms = db.DB()
         terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
         termscur = terms.cursor()
+        years = db.DB()
+        years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
+        yearscur = years.cursor()
+        recs = db.DB()
+        recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
+        recscur = recs.cursor()
         queries = get_queries()
 
         for item in queries:
