@@ -92,7 +92,7 @@ def main():
         queryspots = []
         for i in answers:
             if ':' in i:
-                querylist.apend(counter)
+                queryspots.append(counter)
             counter += 1
             if i == 'q':
                 print("Exiting program...\n")
