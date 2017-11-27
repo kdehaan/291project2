@@ -52,10 +52,9 @@ def main():
                     search_term = search_term.encode('utf-8')
                     result = termscur.get(search_term, search_term, db.DB_SET)
                     curs_iter = result
-                    while curs_iter:
+                    while curs_iter[0] == search_term:
                         print(curs_iter)
                         curs_iter = termscur.next()
-                    print(search_term)
             elif match_author.match(item):
                 search_term = item[7:]
                 search_term = 'a-' + search_term
