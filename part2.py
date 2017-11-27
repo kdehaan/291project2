@@ -40,6 +40,7 @@ def print_db(db):
     while iter_curs:
         print(iter_curs)
         iter_curs = curs.next()
+
     curs.close()
 
 def clear_db(curs):
@@ -51,12 +52,15 @@ def clear_db(curs):
 
 def main():
     terms = db.DB()
-    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE, db.DB_DUP)
+    terms.set_flags(db.DB_DUP)
+    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
     termscur = terms.cursor()
     years = db.DB()
-    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE, db.DB_DUP)
+    years.set_flags(db.DB_DUP)
+    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
     yearscur = years.cursor()
     recs = db.DB()
+    recs.set_flags(db.DB_DUP)
     recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
     recscur = recs.cursor()
 
