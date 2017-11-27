@@ -2,46 +2,6 @@ import subprocess
 from bsddb3 import db
 import re
 
-def fill_db(database, filename):
-    #outstr = '-o' + filename
-    sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
-    for line in sort.stdout:
-        key = ''
-        value = ''
-        if line[0] == 10:
-            pass
-        else:
-            keyfound = False
-            count = -1
-            while not keyfound:
-                count += 1
-                if line[count] == 58:
-                    keyfound = True
-                else:
-                    key += chr(line[count])
-            valuefound = False
-            while not valuefound:
-                count += 1
-                if line[count] == 10:
-                    valuefound = True
-                else:
-                    value += chr(line[count])
-            key = key.encode('utf-8')
-            database.put(key, value)
-
-def print_db(db):
-    curs = db.cursor()
-    iter_curs = curs.first()
-    while iter_curs:
-        print(iter_curs)
-        iter_curs = curs.next()
-
-def clear_db(database, curs):
-    iter = curs.first()
-    while (iter):
-        curs.delete()
-        iter = curs.first()
-
 
 def get_queries():
     sel = input("Enter your database search. To see query options, enter h. To quit, enter q: ").lower()
