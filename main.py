@@ -14,17 +14,26 @@ def get_queries():
 
 def get_year(yearscur, year, qualifier):
     result_set = set()
-    if qualifier == ':':
-        result = yearscur.get(year, year, db.DB_SET)
-    elif qualifier == '<':
-        result = yearscur.setrange(year, db.DB_SET)
+    result = yearscur.get(year, year, db.DB_SET)
     curs_iter = result
-
-    while curs_iter[0] == year:
-        result_set.add(curs_iter[1].decode('utf-8'))
-        curs_iter = yearscur.next()
-        if not curs_iter:
-            curs_iter = ['', '']
+    if qualifier == '<':
+        while curs_iter[0] == year:
+            result_set.add(curs_iter[1].decode('utf-8'))
+            curs_iter = yearscur.prev()
+            if not curs_iter:
+                curs_iter = ['', '']
+    elif qualifier == ':':
+        while curs_iter[0] == year:
+            result_set.add(curs_iter[1].decode('utf-8'))
+            curs_iter = yearscur.next()
+            if not curs_iter:
+                curs_iter = ['', '']
+    else:
+        while curs_iter:
+            result_set.add(curs_iter[1].decode('utf-8'))
+            curs_iter = yearscur.next()
+            if not curs_iter:
+                curs_iter = ['', '']
 
     return result_set
 
