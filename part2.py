@@ -36,6 +36,7 @@ def print_db(db):
     while iter_curs:
         print(iter_curs)
         iter_curs = curs.next()
+    curs.close()
 
 def clear_db(curs):
     iter = curs.first()

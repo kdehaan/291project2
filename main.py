@@ -18,7 +18,19 @@ def main():
     match_author = re.compile(r"author:")
     match_year = re.compile(r"year[:<>]")
     match_other = re.compile(r"other:")
+    terms = db.DB()
+    terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
+    years = db.DB()
+    years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
+    recs = db.DB()
+    recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
+
+
+
     while True:
+        recscur = recs.cursor()
+        yearscur = years.cursor()
+        termscur = terms.cursor()
         queries = get_queries()
         for item in queries:
             if item == "output=key":
@@ -38,9 +50,14 @@ def main():
             else:
                 print("general term found")
 
+        termscur.close()
+        yearscur.close()
+        recscur.close()
 
 
-
+    terms.close()
+    years.close()
+    recs.close()
 
 
 
