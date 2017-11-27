@@ -88,6 +88,7 @@ def main():
             elif match_author.match(item):
                 search_term = item[7:]
                 search_term = 'a-' + search_term
+                search_term = search_term.encode('utf-8')
                 set_list.append(get_data(termscur, search_term))
             elif match_year.match(item):
                 equality = item[4]
@@ -98,6 +99,7 @@ def main():
                 search_term = item.split(':')
                 search_term = search_term[1]
                 search_term = 'o-' + search_term
+                search_term = search_term.encode('utf-8')
                 set_list.append(get_data(termscur, search_term))
             else:
                 search_term_1 = 'o-' + item
