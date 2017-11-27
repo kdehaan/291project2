@@ -3,7 +3,8 @@ from bsddb3 import db
 
 
 def fill_db(database, filename):
-    #outstr = '-o' + filename
+    outstr = '-o' + filename
+    sort = subprocess.Popen(['sort', '-u', outstr, filename])
     sort = subprocess.Popen(['sort', '-u', filename], stdout=subprocess.PIPE)
     for line in sort.stdout:
         key = ''
@@ -35,7 +36,7 @@ def print_db(db):
     iter_curs = curs.first()
     while iter_curs:
         print(iter_curs)
-        iter_curs = curs.next()
+        iter_curs = curs.next_nodup()
     curs.close()
 
 def clear_db(curs):
@@ -66,6 +67,7 @@ def main():
         fill_db(years, 'years.txt')
         fill_db(recs, 'recs.txt')
 
+    print_db(years)
     terms.close()
     years.close()
     recs.close()
