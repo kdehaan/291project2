@@ -2,6 +2,7 @@ import subprocess
 from bsddb3 import db
 
 
+# populate db
 def fill_db(database, filename):
     outstr = '-o' + filename
     subprocess.Popen(['sort', '-u', outstr, filename])
@@ -34,6 +35,7 @@ def fill_db(database, filename):
             database.put(key, value)
 
 
+# used for debugging
 def print_db(db):
     curs = db.cursor()
     iter_curs = curs.first()
@@ -43,6 +45,8 @@ def print_db(db):
 
     curs.close()
 
+
+# empty db
 def clear_db(curs):
     iter = curs.first()
     while (iter):
@@ -80,6 +84,7 @@ def main():
     termscur.close()
     yearscur.close()
     recscur.close()
+
 
 if __name__ == "__main__":
     main()

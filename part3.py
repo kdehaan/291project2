@@ -1,8 +1,8 @@
-# import subprocess
 from bsddb3 import db
 import re
 
 
+# parse input to form queries
 def get_queries():
     sel = input("Enter your database search: ").lower()
     parse_input = re.compile(r"([\w]+:[\w]+|year.{1,2}[\d]{4}|title:\".+\"|output=[\w]{3,4}|[\w]+)")
@@ -12,6 +12,8 @@ def get_queries():
         queries.append(item.group())
     return queries
 
+
+# filters by input year
 def get_year(yearscur, year, qualifier):
     result_set = set()
 
@@ -43,7 +45,7 @@ def get_year(yearscur, year, qualifier):
     return result_set
 
 
-
+# filters term searches
 def get_data(termscur, search_term):
     result = termscur.get(search_term, search_term, db.DB_SET)
     curs_iter = result
@@ -56,6 +58,7 @@ def get_data(termscur, search_term):
         if not curs_iter:
             curs_iter = ['', '']
     return result_set
+
 
 def main():
     output_type = 'key'
@@ -70,13 +73,12 @@ def main():
     recs = db.DB()
     recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE, db.DB_DUP)
 
-
+    #
     while True:
         termscur = terms.cursor()
         yearscur = years.cursor()
         recscur = recs.cursor()
         queries = get_queries()
-
 
         set_list = list()
         for item in queries:
@@ -134,7 +136,7 @@ def main():
             if len(net_set) == 0:
                 net_set = setitem
             else:
-                net_set = net_set & setitem
+                net_set = net_set & setitem  # set intersection
 
         if output_type == 'key':
             for setitem in net_set:
@@ -145,14 +147,9 @@ def main():
                 result = recs.get(search_term)
                 print(result)
 
-
-
-
-
         termscur.close()
         yearscur.close()
         recscur.close()
-
 
 
 if __name__ == "__main__":

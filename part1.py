@@ -2,7 +2,7 @@ import re
 import sys
 from xml_object import XmlObject
 
-
+# read from stdin
 def parse_data():
 
     data = sys.stdin.read()
@@ -11,6 +11,7 @@ def parse_data():
     return data
 
 
+# creates the three text files
 def prepare_files(data):
 
     terms_file = open("terms.txt", "w")
@@ -83,21 +84,13 @@ def prepare_files(data):
             recs_file.write(rec_string)
 
 
-    # regex:
+    # regex notes:
     # article block: <article.*/article>
     # article key: (?<=key=\").*(?=\")
     # terms: [0-9a-zA-Z_]{3,}
     # authors: (?<=<author>).*?(?=</)
     # title: (?<=<title>).*?(?=</)
     # contained tags with titles (?=(<[\w]+>)).*?(?=</)
-    return
-
-
-def create_years(data):
-    return
-
-
-def create_recs(data):
     return
 
 
