@@ -71,15 +71,14 @@ def main():
             else:
                 print("general term found")
 
+
+
+
         termscur.close()
         yearscur.close()
         recscur.close()
 
 
-    terms.close()
-    years.close()
-    recs.close()
-    
 
 if __name__ == "__main__":
     main()
