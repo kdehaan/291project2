@@ -1,5 +1,5 @@
-import subprocess
-from bsddb3 import db
+# import subprocess
+# from bsddb3 import db
 import re
 
 
@@ -13,82 +13,31 @@ def get_queries():
     return queries
 
 def main():
-
-
-    done = False
-    output = 'key'
-    while not done:
-        goodin = False
+    output_type = 'key'
+    match_title = re.compile(r"title:")
+    match_author = re.compile(r"author:")
+    match_year = re.compile(r"year[:<>]")
+    match_other = re.compile(r"other:")
+    while True:
         queries = get_queries()
-        answerparted = False
-        answers = []
-        counter = 0
-        lastend = 0
-        answercount = 0
-        for i in answer:
-            word = ''
-            if i == ' ' or ord(i) == 10:
-                for m in range(lastend, counter):
-                    word += answer[m]
-                answers[answercount] = word
-            counter += 1
+        for item in queries:
+            if item == "output=key":
+                output_type = 'key'
+                print("changed output (key)")
+            elif item == "output=full":
+                output_type = 'full'
+                print("changed output")
+            elif match_title.match(item):
+                print("title found")
+            elif match_author.match(item):
+                print("author found")
+            elif match_year.match(item):
+                print("year found")
+            elif match_other.match(item):
+                print("other found")
+            else:
+                print("general term found")
 
-        counter = 0
-        queryspots = []
-        for i in answers:
-            if ':' in i or '>' in i or '<' in i:
-                queryspots.append(counter)
-
-
-            counter += 1
-            if i == 'q':
-                print("Exiting program...\n")
-                done = True
-                goodin = True
-            elif i == 'h':
-                print('\nQuery options: (Enter the query type, then a colon, then the query. Multiple queries should be separated by a space)'
-                      '\nTitle: Search by title, or words in title. \nAuthor: Search by author. \n'
-                      'Year: Search by year. Can be equality search or range search. '
-                      '\nOutput=full: Set output format to print entire entry. \nOutput=key: Set output to only show key. \n')
-            elif i == 'output=full':
-                output = 'full'
-            elif i == 'output=key':
-                output = 'key'
-
-        querylist = []
-        for i in queryspots:
-            querytype = ''
-            value = ''
-            checkfound = False
-            for m in answers[i]:
-                if checkfound:
-                    value += m
-                elif m == ':':
-                    checkfound = True
-                elif '>' in i or '<' in i:
-                    checkfound = True
-                    querytype += m
-                else:
-                    querytype += m
-                mspot += 1
-            if checkfound:
-                querylist.append([querytype, value])
-
-
-        for i in querylist:
-            if not done:
-                if i[0] == 'title':
-                    pass
-                elif i[0] == 'author':
-                    pass
-                elif i[0] == 'year<':
-                    pass
-                elif i[0] == 'year>':
-                    pass
-                elif i[0] == 'year':
-                    pass
-                if i == title:
-                    pass
 
 
 
