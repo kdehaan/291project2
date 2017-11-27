@@ -17,8 +17,7 @@ def main():
     match_title = re.compile(r"title:")
     match_author = re.compile(r"author:")
     match_year = re.compile(r"year[:<>]")
-<<<<<<< HEAD
-    match_other = re.compile(r"other:")
+    match_other = re.compile(r":")
     terms = db.DB()
     terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
     years = db.DB()
@@ -26,26 +25,10 @@ def main():
     recs = db.DB()
     recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
 
-
-
     while True:
-        recscur = recs.cursor()
-        yearscur = years.cursor()
         termscur = terms.cursor()
-=======
-    match_other = re.compile(r":")
-
-    while True:
-        terms = db.DB()
-        terms.open("terms.idx", None, db.DB_BTREE, db.DB_CREATE)
-        termscur = terms.cursor()
-        years = db.DB()
-        years.open("years.idx", None, db.DB_BTREE, db.DB_CREATE)
         yearscur = years.cursor()
-        recs = db.DB()
-        recs.open("recs.idx", None, db.DB_HASH, db.DB_CREATE)
         recscur = recs.cursor()
->>>>>>> moreparsing
         queries = get_queries()
 
         for item in queries:
@@ -86,7 +69,6 @@ def main():
                 search_term = 'o-' + search_term
                 print(search_term)
             else:
-<<<<<<< HEAD
                 print("general term found")
 
         termscur.close()
@@ -97,19 +79,7 @@ def main():
     terms.close()
     years.close()
     recs.close()
-
-=======
-                search_term = item
-                print(item)
->>>>>>> moreparsing
-
-
-        terms.close()
-        years.close()
-        recs.close()
-        termscur.close()
-        yearscur.close()
-        recscur.close()
+    
 
 if __name__ == "__main__":
     main()
