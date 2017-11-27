@@ -421,10 +421,10 @@
 2010:conf/icmlc/ChenWW10
 2010:conf/icmlc/Huang10
 2010:conf/icmlc/JiangHZW10
-2010:conf/icmlc/LiangZ10
 2010:conf/icmlc/LiJLZ10
-2010:conf/icmlc/LiuS10
 2010:conf/icmlc/LiWYZR10
+2010:conf/icmlc/LiangZ10
+2010:conf/icmlc/LiuS10
 2010:conf/icmlc/LvLWX10
 2010:conf/icmlc/PangW10
 2010:conf/icmlc/PangY10
@@ -481,8 +481,8 @@
 2011:conf/icmlc/ChenF11a
 2011:conf/icmlc/ChenW11b
 2011:conf/icmlc/LiK11
-2011:conf/icmlc/LiuMJLCL11
 2011:conf/icmlc/LiZX11
+2011:conf/icmlc/LiuMJLCL11
 2011:conf/icmlc/MaLHFK11
 2011:conf/icmlc/ShiL11
 2011:conf/icmlc/ShiTHL11
@@ -561,8 +561,8 @@
 2012:conf/icmlc/GanZYX12
 2012:conf/icmlc/JettanasenKBNSSS12
 2012:conf/icmlc/JinYLL12
-2012:conf/icmlc/LiuCW12
 2012:conf/icmlc/LiZ12
+2012:conf/icmlc/LiuCW12
 2012:conf/icmlc/ShinL12
 2012:conf/icmlc/WangFALS12
 2012:conf/icmlc/WangFLZ12
@@ -580,8 +580,8 @@
 2012:conf/ipps/HuZXTS12
 2012:conf/ipps/KohlerR12
 2012:conf/ipps/Li12
-2012:conf/ipps/LiuZLL12
 2012:conf/ipps/LiVMMCLY12
+2012:conf/ipps/LiuZLL12
 2012:conf/ipps/MaBBD12
 2012:conf/ipps/MahapatraYN12
 2012:conf/ipps/MatosSFOR12

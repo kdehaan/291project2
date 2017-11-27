@@ -55,6 +55,8 @@ def main():
                     while curs_iter[0] == search_term:
                         print(curs_iter)
                         curs_iter = termscur.next()
+                        if not curs_iter:
+                            curs_iter = ['']
             elif match_author.match(item):
                 search_term = item[7:]
                 search_term = 'a-' + search_term
